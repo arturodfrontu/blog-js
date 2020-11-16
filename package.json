@@ -1,0 +1,34 @@
+{
+  "name": "task-runer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "scripts": {
+    "init-project": "npm install && npm-run-all init:*",
+    "init:dirs": "mkdirp sass/partials css vendor images/imgsrc js ",
+    "init:files": "touch README.md index.html sass/style.scss sass/partials/_mixins.scss sass/partials/_fonts.scss sass/partials/_variables.scss js/script.js",
+    "init:images": "imagemin images/imgsrc/* -o images/ -p",
+    "init:gitignore": "curl https://raw.githubusercontent.com/github/gitignore/master/Node.gitignore -o .gitignore",
+    "test": "npm-run-all test:*",
+    "test:html": "html-validate *.html",
+    "build": "npm-run-all build:sass test",
+    "build:sass": "node-sass --output-style compact -o css sass",
+    "build-dev": "npm run build-dev:sass ",
+    "build-dev:sass": "node-sass --output-style expanded --source-map true -o css sass",
+    "watch": "npm-run-all build:sass build-dev:sass -p watch:browsersync watch:sassprefixer",
+    "watch:browsersync": "browser-sync start --server --files js css index.html",
+    "watch:sassprefixer": "onchange \"sass/style.scss\" -- npm run build-dev:sass"
+  },
+  "author": "Artur Trąpczyński",
+  "license": "ISC",
+  "devDependencies": {
+    "browser-sync": "^2.26.13",
+    "html-validate": "^3.5.0",
+    "imagemin-cli": "^6.0.0",
+    "mkdirp": "^1.0.4",
+    "node-sass": "^5.0.0",
+    "npm-run-all": "^4.1.5",
+    "onchange": "^7.1.0"
+  },
+  "dependencies": {}
+}
