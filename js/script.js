@@ -1,41 +1,33 @@
 'use strict';
 
-const titleClickHandler = function (event) {
+const activeClass = 'active';
 
+const titleClickHandler = function(event) {
     event.preventDefault();
-
     const clickedElement = this;
+    const activeLinks = document.querySelectorAll('.titles a.' + activeClass);
 
-    /*[DONE] remove class 'active' from all article links  */
+    removeClassFromList(activeLinks);
 
-    const activeLinks = document.querySelectorAll('.titles a.active');
+    addClassToElement(clickedElement);
 
-    for (let activeLink of activeLinks) {
-        activeLink.classList.remove('active');
-    }
-    /*[DONE] add class 'active' to the clicked link */
+    const activeArticles = document.querySelectorAll('.posts article.' + activeClass);
 
-    clickedElement.classList.add('active');
-
-    /*[DONE] remove class 'active' from all articles */
-
-    const activeArticles = document.querySelectorAll('.posts article.active');
-
-    for (let activeArticle of activeArticles) {
-        activeArticle.classList.remove('active');
-    }
-    /*[DONE] get 'href' attribute from the clicked link */
+    removeClassFromList(activeArticles);
 
     const href = clickedElement.getAttribute('href');
-
-
-    /*[DONE] find the correct article using the selector (value of 'href' attribute) */
-
     const selectedArticle = document.querySelector(href);
+    addClassToElement(selectedArticle);
 
-    /*[DONE] add class 'active' to the correct article */
+    function addClassToElement(element, className = activeClass) {
+        element.classList.add(className);
+    }
 
-    selectedArticle.classList.add('active');
+    function removeClassFromList(list, className = activeClass){
+        for(let element of list){
+            element.classList.remove(className)
+        }
+    }
 }
 
 const links = document.querySelectorAll('.titles a');
