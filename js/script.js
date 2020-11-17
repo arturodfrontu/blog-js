@@ -39,6 +39,12 @@ function generateTitleLinks(){
         elements.innerHTML = '';
     }
     removeElements(titleList);
+
+    const articles = document.querySelectorAll(optArticleSelector);
+
+    for(let article of articles){
+        const articleId = article.getAttribute('id');
+    }
 }
 generateTitleLinks();
 
