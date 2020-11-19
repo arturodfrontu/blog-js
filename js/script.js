@@ -32,11 +32,13 @@ const optArticleSelector = '.post';
 const optTitleSelector = '.post-title';
 const optTitleListSelector = '.titles';
 
-function generateTitleLinks(){
+function removeElements(elements){
+    elements.innerHTML = '';
+}
+
+const generateTitleLinks = function(){
     const titleList = document.querySelector(optTitleListSelector);
-    function removeElements(elements){
-        elements.innerHTML = '';
-    }
+
     removeElements(titleList);
 
     const articles = document.querySelectorAll(optArticleSelector);
