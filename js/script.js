@@ -68,7 +68,16 @@ const generateTags = function(){
   for(let article of articles){
     const tagsWrapper = article.querySelector(optArticleTagsSelector);
     const tags = article.getAttribute('data-tags');
+    const tagsArray = tags.split('   ');
+
+    for(let tag of tagsArray){
+
+      const tagHTML = '<li><a href="#tag-' + tag + ' "><span>' + tag + '</span></a></li>';
+      console.log(tagHTML);
+      html = html + tagHTML;
+    }
+    tagsWrapper.innerHTML = html;
   }
 
-
 };
+generateTags();
