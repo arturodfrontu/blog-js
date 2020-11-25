@@ -62,22 +62,17 @@ for (let link of links) {
 
 const generateTags = function(){
   const articles = document.querySelectorAll(optArticleSelector);
-
-  let html ='';
-
   for(let article of articles){
+    let html ='';
     const tagsWrapper = article.querySelector(optArticleTagsSelector);
     const tags = article.getAttribute('data-tags');
-    const tagsArray = tags.split('   ');
+    const tagsArray = tags.split(' ');
 
     for(let tag of tagsArray){
-
-      const tagHTML = '<li><a href="#tag-' + tag + ' "><span>' + tag + '</span></a></li>';
-      console.log(tagHTML);
+      const tagHTML = '<li class="tag"><a href="#tag-' + tag + ' "><span>' + tag + '</span></a></li>';
       html = html + tagHTML;
     }
     tagsWrapper.innerHTML = html;
   }
-
 };
 generateTags();
