@@ -6,7 +6,7 @@ const optTitleSelector = '.post-title';
 const optTitleListSelector = '.titles';
 const optLinkSelector = 'titles a';
 const optArticleTagsSelector = '.post-tags .list';
-const optTagsListSelector = '.tags .list';
+//const optTagsListSelector = '.tags .list';
 
 const titleClickHandler = function (event) {
   event.preventDefault();
@@ -36,10 +36,10 @@ const removeElement = function (element) {
   element.innerHTML = '';
 };
 
-const generateTitleLinks = function () {
+const generateTitleLinks = function (customSelector ='') {
   const titleList = document.querySelector(optTitleListSelector);
-  const articles = document.querySelectorAll(optArticleSelector);
-
+  const articles = document.querySelectorAll(optArticleSelector + customSelector);
+  console.log('++++++', customSelector, '++++++', optArticleSelector);
   let html = '';
 
   removeElement(titleList);
@@ -56,13 +56,14 @@ const generateTitleLinks = function () {
 };
 
 generateTitleLinks();
-let allTags = [];
+
 const links = document.querySelectorAll('.titles a');
 for (let link of links) {
   link.addEventListener('click', titleClickHandler);
 }
 
 const generateTags = function () {
+  let allTags = [];
   const articles = document.querySelectorAll(optArticleSelector);
   for (let article of articles) {
     let html = '';
