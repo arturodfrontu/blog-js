@@ -30,8 +30,9 @@ const titleClickHandler = function (event) {
       element.classList.remove(className);
     }
   }
-};
+  console.log(clickedElement);
 
+};
 const removeElement = function (element) {
   element.innerHTML = '';
 };
@@ -39,7 +40,7 @@ const removeElement = function (element) {
 const generateTitleLinks = function (customSelector ='') {
   const titleList = document.querySelector(optTitleListSelector);
   const articles = document.querySelectorAll(optArticleSelector + customSelector);
-  console.log('++++++', customSelector, '++++++', optArticleSelector);
+
   let html = '';
 
   removeElement(titleList);
@@ -61,25 +62,25 @@ const links = document.querySelectorAll('.titles a');
 for (let link of links) {
   link.addEventListener('click', titleClickHandler);
 }
-
+console.log(links);
 const generateTags = function () {
   let allTags = [];
   const articles = document.querySelectorAll(optArticleSelector);
   for (let article of articles) {
-    let html = '';
+    let html = ' ';
     const tagsWrapper = article.querySelector(optArticleTagsSelector);
     const tags = article.getAttribute('data-tags');
     const tagsArray = tags.split(' ');
 
     for (let tag of tagsArray) {
-      const tagHTML = '<li class="tag"><a href="#tag-' + tag + ' "><span>' + tag + '</span></a></li>';
+      const tagHTML = '<li class="tag"><a href="#tag-' + tag + '"><span>' + tag + '</span></a></li>';
       html = html + tagHTML;
       if (allTags.indexOf(tagHTML) == -1) {
         allTags.push(tagHTML);
       }
     }
     const tagList = document.querySelector('.tags');
-    tagList.innerHTML = allTags.join(' ');
+    tagList.innerHTML = allTags.join('');
     tagsWrapper.innerHTML = html;
   }
 };
@@ -102,7 +103,7 @@ function tagClickHandler(event) {
     sameTagLink.classList.add('active');
   }
 
-  generateTitleLinks('[data-tags~="' + tag + '"]');
+  generateTitleLinks('[data-tags~="'+tag+'"]');
 
 }
 
