@@ -125,4 +125,51 @@ body {
 
 .tag {
   margin: 0 5px;
+  display: flex;
+  flex-direction: row;
+
+}
+
+.tag-size-1 {
+  a {
+    color: #123456;
+    font-size: 12px;
+
+  }
+}
+.tag-size-2 {
+  a {
+    color: #12561b;
+    font-size: 15px;
+    &:visited{
+      color: #12561b;
+    }
+  }
+}
+.tag-size-3 {
+  a {
+    color: #564612;
+    font-size: 20px;
+    &:visited{
+      color: #564612;
+    }
+  }
+}
+.tag-size-4 {
+  a {
+    color: #561212;
+    font-size: 25px;
+    &:visited{
+      color: #561212;
+    }
+  }
+}
+.tag-size-5 {
+  a {
+    color: #4e1256;
+    font-size: 30px;
+    &:visited {
+      color: #4e1256;
+    }
+  }
 }
