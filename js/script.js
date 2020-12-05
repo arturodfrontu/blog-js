@@ -146,7 +146,7 @@ function tagClickHandler(event) {
     sameTagLink.classList.add('active');
   }
 
-  generateTitleLinks('[data-tags~="'+tag+'"]');
+  generateTitleLinks('[data-tags~="' + tag + '"]');
 
 }
 
