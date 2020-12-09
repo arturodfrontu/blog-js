@@ -1,6 +1,39 @@
 'use strict';
 
 const activeClass = 'active';
+const selector ={
+  all: {
+    articles: '.post',
+    linksTo: {
+      tags: 'a[href^="#tag-"]',
+      authors: 'a[href^="#authors-"]',
+    },
+    links: '.titles a',
+    listOf: {
+      titles: '.titles',
+      tags: '.tags .list',
+      authors: '.authors .list',
+    },
+  },
+  article: {
+    tags: '.post-tags .list',
+    author: '.post-author',
+  },
+  title: '.post-title',
+  active: {
+    articles: '.post article.' + activeClass,
+  }
+};
+
+const opt = {
+  tagSizes: {
+    count: 5,
+    classPrefix: 'tag-size-',
+  },
+};
+
+/*
+const activeClass = 'active';
 const optArticleSelector = '.post';
 const optTitleSelector = '.post-title';
 const optTitleListSelector = '.titles';
@@ -13,14 +46,15 @@ const opt = {
     classPrefix: 'tag-size-',
   },
 };
+*/
 
 const titleClickHandler = function (event) {
   event.preventDefault();
   const clickedElement = this;
-  const activeLinks = document.querySelectorAll(optLinkSelector + '.' + activeClass);
+  const activeLinks = document.querySelectorAll(selector.all.links  + '.' + activeClass);
   const href = clickedElement.getAttribute('href');
   const selectedArticle = document.querySelector(href);
-  const activeArticles = document.querySelectorAll('.posts article.' + activeClass);
+  const activeArticles = document.querySelectorAll(selector.active.articles);
 
   removeClassFromList(activeLinks);
   addClassToElement(clickedElement);
@@ -43,8 +77,8 @@ const removeElement = function (element) {
 };
 
 const generateTitleLinks = function (customSelector ='') {
-  const titleList = document.querySelector(optTitleListSelector);
-  const articles = document.querySelectorAll(optArticleSelector + customSelector);
+  const titleList = document.querySelector(selector.all.listOf.titles);
+  const articles = document.querySelectorAll(selector.all.articles + customSelector);
 
   let html = '';
 
@@ -52,7 +86,7 @@ const generateTitleLinks = function (customSelector ='') {
 
   for (let article of articles) {
     const articleId = article.getAttribute('id');
-    const articleTitle = article.querySelector(optTitleSelector).innerHTML;
+    const articleTitle = article.querySelector(selector.title).innerHTML;
     const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
     html = html + linkHTML;
   }
@@ -63,7 +97,7 @@ const generateTitleLinks = function (customSelector ='') {
 
 generateTitleLinks();
 
-const links = document.querySelectorAll('.titles a');
+const links = document.querySelectorAll(selector.all.links);
 for (let link of links) {
   link.addEventListener('click', titleClickHandler);
 }
@@ -99,10 +133,10 @@ const calculateTagClass = function(count, params){
 
 const generateTags = function () {
   let allTags = {};
-  const articles = document.querySelectorAll(optArticleSelector);
+  const articles = document.querySelectorAll(selector.all.articles);
   for (let article of articles) {
     let html = ' ';
-    const tagsWrapper = article.querySelector(optArticleTagsSelector);
+    const tagsWrapper = article.querySelector(selector.article.tags);
     const tags = article.getAttribute('data-tags');
     const tagsArray = tags.split(' ');
 
@@ -143,10 +177,10 @@ function tagClickHandler(event) {
   }
 
   for(let sameTagLink of sameTagsLinks){
-    sameTagLink.classList.add('active');
+    sameTagLink.classList.add(activeClass );
   }
 
-  generateTitleLinks('[data-tags~="' + tag + '"]');
+  generateTitleLinks('[data-tags~="'+tag+'"]');
 
 }
 
@@ -162,9 +196,9 @@ function addClickListenersToTags() {
 addClickListenersToTags();
 
 const generateAuthorList = function(){
-  const articles = document.querySelectorAll(optArticleSelector);
+  const articles = document.querySelectorAll(selector.all.articles);
   for(let article of articles){
-    const authorWrapper = article.querySelector(optArticleAuthorSelector);
+    const authorWrapper = article.querySelector(selector.article.author);
     let html = '';
     const tagAuthor = article.getAttribute('data-author');
     const linkHTML = '<li>by <a href="#author-' + tagAuthor + '">' + tagAuthor + '</a></li>';
