@@ -69,8 +69,6 @@ const titleClickHandler = function (event) {
       element.classList.remove(className);
     }
   }
-  console.log(clickedElement);
-
 };
 const removeElement = function (element) {
   element.innerHTML = '';
@@ -201,10 +199,12 @@ const generateAuthorList = function(){
     const authorWrapper = article.querySelector(selector.article.author);
     let html = '';
     const tagAuthor = article.getAttribute('data-author');
-    const linkHTML = '<li>by <a href="#author-' + tagAuthor + '">' + tagAuthor + '</a></li>';
+    const linkHTML = `<li>by <a href="#author-` + tagAuthor + `">` + tagAuthor + `</a></li>`;
     html = html + linkHTML;
     authorWrapper.innerHTML = html;
+
   }
+
 };
 generateAuthorList();
 
@@ -232,4 +232,5 @@ const addClickListenersToAuthorsList = function(){
     linkAuthor.addEventListener('click', authorListClickHandler);
   }
 };
+
 addClickListenersToAuthorsList();
