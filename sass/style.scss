@@ -4,6 +4,11 @@
 
 $color-light: #fff;
 $color-dark: #444;
+$color-tag-size-1: #070707;
+$color-tag-size-2: #31eb2a;
+$color-tag-size-3: #ea00ff;
+$color-tag-size-4: #854d62;
+$color-tag-size-5: #b10e0e;
 
 $font-logo: 'Sacramento', cursive;
 $font-header: 'Oswald', sans-serif;
@@ -125,4 +130,38 @@ body {
 
 .tag {
   margin: 0 5px;
+  font-size: 12px;
 }
+
+
+.tag-size-1{
+  font-size: 15px;
+  &:link, &:visited, &:hover, &:active{
+    color:$color-tag-size-1;
+  }
+}
+.tag-size-2{
+  font-size: 18px;
+  &:link, &:visited, &:hover, &:active{
+    color:$color-tag-size-2;
+  }
+}
+.tag-size-3{
+  font-size: 20px;
+  &:link, &:visited, &:hover, &:active{
+    color:$color-tag-size-3;
+  }
+}
+.tag-size-4{
+  font-size: 22px;
+  &:link, &:visited, &:hover, &:active{
+    color:$color-tag-size-4;
+  }
+}
+.tag-size-5{
+  font-size: 25px;
+  &:link, &:visited, &:hover, &:active{
+    color:$color-tag-size-5
+  }
+}
+
